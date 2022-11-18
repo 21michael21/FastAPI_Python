@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mainsys:
+    build: 
+      context: osnova_page
+      args:
+        URL: "http://subordinate_page:80"
+    networks:
+      - common
+    ports:
+      - 5000:80
+    volumes:
+      - './osnova_page:/osnova_page'
+    depends_on:
+      - subordinate_page
+  subordinate_page:
+    build: subordinate_page
+    networks:
+      - common
+networks:
+  common:
